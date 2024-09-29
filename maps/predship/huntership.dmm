@@ -1329,7 +1329,7 @@
 	color = "#6b675e";
 	layer = 2.79
 	},
-/obj/item/tool/pickaxe/jackhammer,
+/obj/item/weapon/twohanded/breacher/strong/yautja,
 /turf/open/floor/corsat/squareswood/north,
 /area/yautja)
 "dc" = (
