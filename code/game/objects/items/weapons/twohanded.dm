@@ -316,16 +316,24 @@
 	attack_verb = list("pulverized", "smashed", "thwacked", "crushed", "hammered", "wrecked")
 	var/really_heavy = FALSE
 
-/obj/item/weapon/twohanded/breacher/synth
-	name = "\improper B5 Breaching Hammer"
-	desc = "This 100-pound monstrosity of a sledgehammer is made of solid tungsten carbide, and packs enough force in its swing to take down walls with ease. It can punch through steel and concrete, hit like a truck, and is utterly unusable by anyone who isn't superhuman."
-	icon_state = "syn_breacher"
-	item_state = "syn_breacher"
+/obj/item/weapon/twohanded/breacher/strong
 	force_wielded = MELEE_FORCE_VERY_STRONG
 	really_heavy = TRUE
 	var/move_delay_addition = 1.5
 
-/obj/item/weapon/twohanded/breacher/synth/pickup(mob/user)
+/obj/item/weapon/twohanded/breacher/strong/synth
+	name = "\improper B5 Breaching Hammer"
+	desc = "This 100-pound monstrosity of a sledgehammer is made of solid tungsten carbide, and packs enough force in its swing to take down walls with ease. It can punch through steel and concrete, hit like a truck, and is utterly unusable by anyone who isn't superhuman."
+	icon_state = "syn_breacher"
+	item_state = "syn_breacher"
+
+/obj/item/weapon/twohanded/breacher/strong/yautja
+	name = "maul"
+	desc = "A specialized tool used by hunters to tear down walls. Said to have been blessed by Dlex himself. Limited to lodge construction due to the effectiveness of swinging many hundreds of pounds into craniums."
+	icon_state = "d2_breacher"
+	item_state = "d2_breacher"
+
+/obj/item/weapon/twohanded/breacher/strong/pickup(mob/user)
 	if(!(HAS_TRAIT(user, TRAIT_SUPER_STRONG)))
 		to_chat(user, SPAN_HIGHDANGER("You barely manage to lift [src] above your knees. This thing will probably be useless to you."))
 		user.apply_effect(3, EYE_BLUR)
@@ -334,15 +342,15 @@
 		return
 	..()
 
-/obj/item/weapon/twohanded/breacher/synth/proc/handle_movedelay(mob/living/M, list/movedata)
+/obj/item/weapon/twohanded/breacher/strong/proc/handle_movedelay(mob/living/M, list/movedata)
 	SIGNAL_HANDLER
 	movedata["move_delay"] += move_delay_addition
 
-/obj/item/weapon/twohanded/breacher/synth/dropped(mob/user, silent)
+/obj/item/weapon/twohanded/breacher/strong/dropped(mob/user, silent)
 	. = ..()
 	UnregisterSignal(user, COMSIG_HUMAN_POST_MOVE_DELAY)
 
-/obj/item/weapon/twohanded/breacher/synth/attack(target as mob, mob/living/user as mob)
+/obj/item/weapon/twohanded/breacher/strong/attack(target as mob, mob/living/user as mob)
 	if(!HAS_TRAIT(user, TRAIT_SUPER_STRONG))
 		to_chat(user, SPAN_WARNING("\The [src] is too heavy for you to use as a weapon!"))
 		return
